@@ -70,6 +70,10 @@ Sistema de reconhecimento acadêmico por meio da distribuição de moedas virtua
 
 ---
 
+## Diagrama de caso de uso
+
+<img src="Diagramas/diagram-user-case.jpg" alt="Diagrama de caso de uso" width="700px">
+
 ##  Requisitos Técnicos 
 
 - Backend: Java / JavaScript / SpringBoot
