@@ -78,6 +78,10 @@ Sistema de reconhecimento acadêmico por meio da distribuição de moedas virtua
 
 <img src="Diagramas/UML.png" alt="Diagrama de classe" width="700px">
 
+## Diagrama de Componentes
+
+<img src="Diagramas/DC.png" alt="Diagrama de componentes" width="700px">
+
 ##  Requisitos Técnicos 
 
 - Backend: Java / JavaScript / SpringBoot
