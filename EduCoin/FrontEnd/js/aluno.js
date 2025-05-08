@@ -80,6 +80,7 @@ document.addEventListener("DOMContentLoaded", carregarAlunos);*/
 
 function cadastrarAluno(event) {
     event.preventDefault(); // Evita o recarregamento da página
+    const id = document.getElementById("id").value;
 
     // Captura os dados do formulário
     const aluno = {
@@ -93,14 +94,17 @@ function cadastrarAluno(event) {
         curso: document.getElementById("curso").value
     };
 
+    const url = id ? `http://localhost:8080/alunos/${id}` : "http://localhost:8080/alunos";
+    const metodo = id ? "PUT" : "POST";
+
     // Envia a requisição para o backend
-    fetch("http://localhost:8080/alunos", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(aluno)
-    })
+    fetch(url, {
+      method: metodo,
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify(aluno)
+  })
     .then(response => {
         if (!response.ok) {
             throw new Error("Erro ao cadastrar aluno");
@@ -108,16 +112,21 @@ function cadastrarAluno(event) {
         return response.json();
     })
     .then(data => {
-        alert("Cadastro realizado com sucesso!");
-        
+      alert(id ? "Aluno atualizado com sucesso!" : "Cadastro realizado com sucesso!");
+
+      document.getElementById("alunoForm").reset();
+      document.getElementById("id").value = "";
+      document.getElementById("btnSalvar").textContent = "Cadastrar Aluno";
+
+      carregarAlunos(); // Recarrega a lista na tela
     })
     .catch(error => {
-        console.error("Erro:", error);
-        alert("Erro ao cadastrar. Verifique os dados e tente novamente.");
+      console.error("Erro:", error);
+      alert("Erro ao salvar. Verifique os dados e tente novamente.");
     });
 }
 
-function carregarPedidos() {
+function carregarAlunos() {
   fetch("http://localhost:8080/alunos")
     .then(response => {
       if (!response.ok) {
@@ -125,8 +134,8 @@ function carregarPedidos() {
       }
       return response.json();
     })
-    .then(pedidos => {
-      exibirPedidos(pedidos); // Exibir os veículos na tela
+    .then(alunos => {
+      exibirAlunos(alunos); // Exibir os veículos na tela
     })
     .catch(error => {
       console.error("Erro:", error);
@@ -134,7 +143,79 @@ function carregarPedidos() {
     });
 }
 
+function exibirAlunos(alunos) {
+  const tbody = document.querySelector("#tabelaAlunos tbody");
+  tbody.innerHTML = ""; // Limpa a tabela antes de preencher
+
+  alunos.forEach(aluno => {
+    const tr = document.createElement("tr");
+
+    tr.innerHTML = `
+      <td>${aluno.nome}</td>
+      <td>${aluno.cpf}</td>
+      <td>${aluno.email}</td>
+      <td>${aluno.curso}</td>
+      <td>${aluno.instituicao}</td>
+      <td>
+        <button class="btn btn-sm btn-warning" onclick="editarAluno(${aluno.id})">Editar</button>
+        <button class="btn btn-sm btn-danger" onclick="excluirAluno(${aluno.id})">Excluir</button>
+      </td>
+    `;
+
+    tbody.appendChild(tr);
+  });
+}
+
+/*function editarAluno(id) {
+  fetch(`http://localhost:8080/alunos/${id}`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Erro ao buscar aluno");
+      }
+      return response.json();
+    })
+    .then(aluno => {
+      // Preenche o formulário com os dados do aluno
+      document.getElementById("id").value = aluno.id;
+      document.getElementById("nome").value = aluno.nome;
+      document.getElementById("cpf").value = aluno.cpf;
+      document.getElementById("rg").value = aluno.rg;
+      document.getElementById("email").value = aluno.email;
+      document.getElementById("endereco").value = aluno.endereco;
+      document.getElementById("curso").value = aluno.curso;
+      document.getElementById("instituicao").value = aluno.instituicao;
+
+      // Muda o texto do botão (opcional)
+      document.getElementById("btnSalvar").textContent = "Atualizar Aluno";
+    })
+    .catch(error => {
+      console.error("Erro:", error);
+      alert("Erro ao carregar dados do aluno.");
+    });
+}
+
+function excluirAluno(id) {
+  if (confirm("Tem certeza que deseja excluir este aluno?")) {
+    fetch(`http://localhost:8080/alunos/${id}`, {
+      method: "DELETE"
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Erro ao excluir aluno");
+      }
+      alert("Aluno excluído com sucesso!");
+      carregarAlunos(); // Atualiza a tabela
+    })
+    .catch(error => {
+      console.error("Erro:", error);
+      alert("Erro ao excluir aluno.");
+    });
+  }
+}*/
+
 document.addEventListener("DOMContentLoaded", function () {
+  carregarAlunos(); // Chama a função ao carregar a página
   const form = document.querySelector("form");
   form.addEventListener("submit", cadastrarAluno);
+  
 });
