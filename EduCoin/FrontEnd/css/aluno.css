@@ -1,0 +1,41 @@
+body {
+    background-color: #e6f7ff;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .navbar-colorida {
+    background: white;
+    padding: 20px 0;
+    border-bottom: 5px solid #d9d9d9;
+  }
+  
+  .logo {
+    font-size: 28px;
+    color: #f9a825;
+    font-weight: bold;
+  }
+  
+  .logo span {
+    color: #29b6f6;
+  }
+  
+  .menu .btn {
+    margin-right: 5px;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 6px 14px;
+  }
+  
+  .btn-portugues { background-color: #ffd600; color: #333; }
+  .btn-ciencia { background-color: #66bb6a; }
+  
+  main {
+    padding-top: 30px;
+    padding-bottom: 50px;
+  }
+  
+  h2, h3 {
+    color: #444;
+  }
+  
