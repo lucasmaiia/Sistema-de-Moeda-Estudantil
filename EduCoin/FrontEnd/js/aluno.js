@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8080/alunos";
+/*const API_URL = "http://localhost:8080/alunos";
 
 document.getElementById("alunoForm").addEventListener("submit", async function (e) {
   e.preventDefault();
@@ -76,4 +76,65 @@ async function deletarAluno(id) {
   }
 }
 
-document.addEventListener("DOMContentLoaded", carregarAlunos);
+document.addEventListener("DOMContentLoaded", carregarAlunos);*/
+
+function cadastrarAluno(event) {
+    event.preventDefault(); // Evita o recarregamento da página
+
+    // Captura os dados do formulário
+    const aluno = {
+        nome: document.getElementById("nome").value,
+        email: document.getElementById("email").value,
+        //senha: document.getElementById("senha").value,
+        endereco: document.getElementById("endereco").value,
+        rg: document.getElementById("rg").value,
+        cpf: document.getElementById("cpf").value,
+        instituicao: document.getElementById("instituicao").value,
+        curso: document.getElementById("curso").value
+    };
+
+    // Envia a requisição para o backend
+    fetch("http://localhost:8080/alunos", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(aluno)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Erro ao cadastrar aluno");
+        }
+        return response.json();
+    })
+    .then(data => {
+        alert("Cadastro realizado com sucesso!");
+        
+    })
+    .catch(error => {
+        console.error("Erro:", error);
+        alert("Erro ao cadastrar. Verifique os dados e tente novamente.");
+    });
+}
+
+function carregarPedidos() {
+  fetch("http://localhost:8080/alunos")
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Erro ao carregar alunos");
+      }
+      return response.json();
+    })
+    .then(pedidos => {
+      exibirPedidos(pedidos); // Exibir os veículos na tela
+    })
+    .catch(error => {
+      console.error("Erro:", error);
+      alert("Erro ao carregar alunos.");
+    });
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.querySelector("form");
+  form.addEventListener("submit", cadastrarAluno);
+});
