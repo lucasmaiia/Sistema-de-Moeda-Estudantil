@@ -39,6 +39,14 @@ public class AlunoController {
         return ResponseEntity.status(HttpStatus.OK).body(alunoRepository.findAll());
     }
 
+    @GetMapping("/alunos/{id}")
+    public ResponseEntity<AlunoModel> buscarPorId(@PathVariable UUID id) {
+        Optional<AlunoModel> aluno = alunoRepository.findById(id);
+        return aluno.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+
     @PutMapping("/alunos/{id}")
     public ResponseEntity<Object> atualizarAluno(@PathVariable(value="id") UUID id, @RequestBody @Valid AlunoDto alunoDto){
         Optional<AlunoModel> aluno = alunoRepository.findById(id);

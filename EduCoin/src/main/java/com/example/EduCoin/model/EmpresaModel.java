@@ -18,10 +18,14 @@ public class EmpresaModel {
 
     private String nome;
     private String cnpj;
+    private String email;
     private String vantagens;
 
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
+    }
+    public void setEmail(String email) {
+        this.email = email;
     }
     public void setId(UUID id) {
         this.id = id;
@@ -37,6 +41,9 @@ public class EmpresaModel {
     }
     public UUID getId() {
         return id;
+    }
+    public String getEmail() {
+        return email;
     }
     public String getNome() {
         return nome;

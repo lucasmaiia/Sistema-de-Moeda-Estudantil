@@ -1,69 +1,180 @@
-const API_URL = "http://localhost:8080/empresas";
 
-document.getElementById("empresaForm").addEventListener("submit", async function (e) {
-  e.preventDefault();
+function cadastrarEmpresa(event) {
+    event.preventDefault(); // Evita o recarregamento da página
+    const id = document.getElementById("id").value;
 
-  const empresa = {
-    nome: document.getElementById("nome").value,
-    cnpj: document.getElementById("cnpj").value,
-    vantagens: document.getElementById("vantagens").value,
-  };
+    // Captura os dados do formulário
+    const empresa = {
+        nome: document.getElementById("nome").value,
+        email: document.getElementById("email").value,
+        //senha: document.getElementById("senha").value,
+        vantagens: document.getElementById("vantagens").value,
+        cnpj: document.getElementById("cnpj").value,
+        
+    };
 
-  const id = document.getElementById("id").value;
+    const url = id ? `http://localhost:8080/empresas/${id}` : "http://localhost:8080/empresas";
+    const metodo = id ? "PUT" : "POST";
 
-  if (id) {
-    await fetch(`${API_URL}/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id, ...empresa }),
+    // Envia a requisição para o backend
+    fetch(url, {
+      method: metodo,
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify(empresa)
+  })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Erro ao cadastrar empresa");
+        }
+        return response.json();
+    })
+    .then(data => {
+      alert(id ? "Empresa atualizado com sucesso!" : "Cadastro realizado com sucesso!");
+
+      document.getElementById("empresaForm").reset();
+      document.getElementById("id").value = "";
+      document.getElementById("btnCadastrar").textContent = "Cadastrar Empresa";
+
+      carregarEmpresas(); // Recarrega a lista na tela
+    })
+    .catch(error => {
+      console.error("Erro:", error);
+      alert("Erro ao salvar. Verifique os dados e tente novamente.");
     });
-  } else {
-    await fetch(API_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(empresa),
+}
+
+function carregarEmpresas() {
+  fetch("http://localhost:8080/empresas")
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Erro ao carregar empresas");
+      }
+      return response.json();
+    })
+    .then(empresas => {
+      exibirEmpresas(empresas); 
+    })
+    .catch(error => {
+      console.error("Erro:", error);
+      alert("Erro ao carregar empresas.");
     });
-  }
+}
 
-  this.reset();
-  carregarEmpresas();
-});
-
-async function carregarEmpresas() {
-  const resposta = await fetch(API_URL);
-  const empresas = await resposta.json();
+function exibirEmpresas(empresas) {
   const tbody = document.querySelector("#tabelaEmpresas tbody");
-  tbody.innerHTML = "";
+  tbody.innerHTML = ""; // Limpa a tabela antes de preencher
 
-  empresas.forEach((e) => {
-    const linha = `<tr>
-      <td>${e.nome}</td>
-      <td>${e.cnpj}</td>
-      <td>${e.vantagens}</td>
+  empresas.forEach(empresa => {
+    const tr = document.createElement("tr");
+
+    tr.innerHTML = `
+      <td>${empresa.nome}</td>
+      <td>${empresa.cnpj}</td>
+      <td>${empresa.email}</td>
+      <td>${empresa.vantagens}</td>
       <td>
-        <button class="btn btn-warning btn-sm btn-editar" onclick='editarEmpresa(${JSON.stringify(e)})'>Editar</button>
-        <button class="btn btn-danger btn-sm" onclick='deletarEmpresa("${e.id}")'>Excluir</button>
+        <button class="btn btn-sm btn-warning" onclick="editarEmpresa('${empresa.id}')">Editar</button>
+        <button class="btn btn-sm btn-danger" onclick="excluirEmpresa('${empresa.id}')">Excluir</button>
       </td>
-    </tr>`;
-    tbody.innerHTML += linha;
+    `;
+
+    tbody.appendChild(tr);
   });
 }
 
-function editarEmpresa(empresa) {
-  document.getElementById("id").value = empresa.id;
-  document.getElementById("nome").value = empresa.nome;
-  document.getElementById("cnpj").value = empresa.cnpj;
-  document.getElementById("vantagens").value = empresa.vantagens;
-  document.getElementById("btnSalvar").textContent = "Atualizar Empresa";
+function editarEmpresa(id) {
+  fetch(`http://localhost:8080/empresas/${id}`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Erro ao buscar empresa para edição");
+      }
+      return response.json();
+    })
+    .then(empresa => {
+      // Preencher os campos do modal
+      document.getElementById("id").value = empresa.id;
+      document.getElementById("modalNome").value = empresa.nome;
+      document.getElementById("modalCnpj").value = empresa.cnpj;
+      document.getElementById("modalEmail").value = empresa.email;
+      document.getElementById("modalVantagens").value = empresa.vantagens;
+
+
+      // Exibir o modal
+      const modal = new bootstrap.Modal(document.getElementById("modalEmpresa"));
+      modal.show();
+    })
+    .catch(error => {
+      console.error("Erro ao buscar empresa:", error);
+      alert("Erro ao carregar os dados do empresa.");
+    });
 }
 
-async function deletarEmpresa(id) {
-  if (confirm("Deseja realmente excluir esta empresa?")) {
-    await fetch(`${API_URL}/${id}`, {
-      method: "DELETE",
+
+function atualizarEmpresa(event) {
+    event.preventDefault();
+
+    const id = document.getElementById("id").value;
+
+    const empresa = {
+        nome: document.getElementById("modalNome").value,
+        cnpj: document.getElementById("modalCnpj").value,
+        email: document.getElementById("modalEmail").value,
+        vantagens: document.getElementById("modalVantagens").value,
+    };
+
+    fetch(`http://localhost:8080/empresas/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(empresa)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Erro ao atualizar empresa");
+        }
+        return response.json();
+    })
+    .then(() => {
+        alert("Empresa atualizado com sucesso!");
+        const modal = bootstrap.Modal.getInstance(document.getElementById('modalEmpresa'));
+        modal.hide();
+        carregarEmpresas();
+    })
+    .catch(error => {
+        console.error("Erro:", error);
+        alert("Erro ao atualizar empresa.");
     });
-    carregarEmpresas();
+}
+
+
+
+function excluirEmpresa(id) {
+  if (confirm("Tem certeza que deseja excluir esta empresa?")) {
+    fetch(`http://localhost:8080/empresas/${id}`, {
+      method: "DELETE"
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Erro ao excluir empresa");
+      }
+      alert("Empresa excluído com sucesso!");
+      carregarEmpresas(); // Atualiza a tabela
+    })
+    .catch(error => {
+      console.error("Erro:", error);
+      alert("Erro ao excluir empresa.");
+    });
   }
 }
 
-document.addEventListener("DOMContentLoaded", carregarEmpresas);
+document.getElementById("formEditarEmpresa").addEventListener("submit", atualizarEmpresa);
+
+document.addEventListener("DOMContentLoaded", function () {
+  carregarEmpresas(); // Chama a função ao carregar a página
+  const form = document.querySelector("form");
+  form.addEventListener("submit", cadastrarEmpresa);
+  
+});

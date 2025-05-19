@@ -31,7 +31,7 @@
               <input type="hidden" id="id" />
               <div class="col-md-6">
                 <label for="nomeEmpresa" class="form-label">Nome da Empresa</label>
-                <input type="text" class="form-control" id="nomeEmpresa" required />
+                <input type="text" class="form-control" id="nome" required />
               </div>
               <div class="col-md-6">
                 <label for="cnpj" class="form-label">CNPJ</label>
@@ -39,14 +39,14 @@
               </div>
               <div class="col-md-6">
                 <label for="emailEmpresa" class="form-label">Email</label>
-                <input type="email" class="form-control" id="emailEmpresa" required />
+                <input type="email" class="form-control" id="email" required />
               </div>
               <div class="col-md-6">
-                <label for="enderecoEmpresa" class="form-label">Endereço</label>
-                <input type="text" class="form-control" id="enderecoEmpresa" required />
+                <label for="vantagensEmpresa" class="form-label">Vantagens</label>
+                <input type="text" class="form-control" id="vantagens" required />
               </div>
               <div class="col-12">
-                <button type="submit" class="btn btn-primary">Cadastrar Empresa</button>
+                <button type="submit" class="btn btn-primary" id="btnCadastrar">Cadastrar Empresa</button>
               </div>
             </form>
           </div>
@@ -75,6 +75,45 @@
     </div>
   </main>
 
+ <!-- Modal de Edição de Empresa -->
+<div class="modal fade" id="modalEmpresa" tabindex="-1" aria-labelledby="modalEmpresaLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <form id="formEditarEmpresa">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalEmpresaLabel">Editar Empresa</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body row g-3">
+          <input type="hidden" id="id" />
+          <div class="col-md-6">
+            <label for="nome" class="form-label">Nome</label>
+            <input type="text" class="form-control" id="modalNome" required />
+          </div>
+          <div class="col-md-3">
+            <label for="cnpj" class="form-label">CPNJ</label>
+            <input type="text" class="form-control" id="modalCnpj" required />
+          </div>
+          <div class="col-md-6">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="modalEmail" required />
+          </div>
+          <div class="col-md-6">
+            <label for="vantagens" class="form-label">Vantagens</label>
+            <input type="text" class="form-control" id="modalVantagens" required />
+          </div>
+        
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../js/empresa.js"></script>
 </body>
 </html>

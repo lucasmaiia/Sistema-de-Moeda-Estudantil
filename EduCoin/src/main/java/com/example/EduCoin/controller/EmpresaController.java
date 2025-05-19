@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.EduCoin.dto.EmpresaDto;
+import com.example.EduCoin.model.AlunoModel;
 import com.example.EduCoin.model.EmpresaModel;
 import com.example.EduCoin.repository.EmpresaRepository;
 
@@ -39,6 +40,14 @@ public class EmpresaController {
     public ResponseEntity<List<EmpresaModel>> listarEmpresa(){
         return ResponseEntity.status(HttpStatus.OK).body(empresaRepository.findAll());
     }
+
+    @GetMapping("/empresas/{id}")
+    public ResponseEntity<EmpresaModel> buscarPorId(@PathVariable UUID id) {
+        Optional<EmpresaModel> empresa = empresaRepository.findById(id);
+        return empresa.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
 
     @PutMapping("/empresas/{id}")
     public ResponseEntity<Object> atualizarEmpresa(@PathVariable(value="id") UUID id, @RequestBody @Valid EmpresaDto empresaDto){
