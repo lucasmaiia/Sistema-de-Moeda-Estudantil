@@ -24,7 +24,14 @@ public class AlunoModel {
     private String curso;
     private String instituicao;
     private String senha;
+    private int saldo = 0;
 
+    public int getSaldo() {
+        return saldo;
+    }
+    public void setSaldo(int saldo) {
+        this.saldo = saldo;
+    }
     public String getSenha() {
         return senha;
     }

@@ -82,6 +82,14 @@ Sistema de reconhecimento acadêmico por meio da distribuição de moedas virtua
 
 <img src="Diagramas/DC.png" alt="Diagrama de componentes" width="700px">
 
+## MER
+
+<img src="Diagramas/EduCoin_MER.png" alt="MER" width="700px">
+
+## Modelo ER
+
+<img src="Diagramas/EduCoin_ModeloER.png" alt="ModeloER" width="700px">
+
 ##  Requisitos Técnicos 
 
 - Backend: Java / JavaScript / SpringBoot
