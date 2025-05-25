@@ -23,7 +23,11 @@ public class AlunoModel {
     private String endereco;
     private String curso;
     private String instituicao;
+    private String senha;
 
+    public String getSenha() {
+        return senha;
+    }
     public String getCpf() {
         return cpf;
     }
@@ -50,6 +54,9 @@ public class AlunoModel {
     }
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
     public void setCurso(String curso) {
         this.curso = curso;

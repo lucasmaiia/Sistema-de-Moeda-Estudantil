@@ -7,8 +7,8 @@ function cadastrarEmpresa(event) {
     const empresa = {
         nome: document.getElementById("nome").value,
         email: document.getElementById("email").value,
-        //senha: document.getElementById("senha").value,
-        vantagens: document.getElementById("vantagens").value,
+        senha: document.getElementById("senha").value,
+        //vantagens: document.getElementById("vantagens").value,
         cnpj: document.getElementById("cnpj").value,
         
     };
@@ -73,7 +73,7 @@ function exibirEmpresas(empresas) {
       <td>${empresa.nome}</td>
       <td>${empresa.cnpj}</td>
       <td>${empresa.email}</td>
-      <td>${empresa.vantagens}</td>
+      <td>${empresa.senha}</td>
       <td>
         <button class="btn btn-sm btn-warning" onclick="editarEmpresa('${empresa.id}')">Editar</button>
         <button class="btn btn-sm btn-danger" onclick="excluirEmpresa('${empresa.id}')">Excluir</button>
@@ -98,7 +98,7 @@ function editarEmpresa(id) {
       document.getElementById("modalNome").value = empresa.nome;
       document.getElementById("modalCnpj").value = empresa.cnpj;
       document.getElementById("modalEmail").value = empresa.email;
-      document.getElementById("modalVantagens").value = empresa.vantagens;
+      document.getElementById("modalSenha").value = empresa.senha;
 
 
       // Exibir o modal
@@ -121,7 +121,7 @@ function atualizarEmpresa(event) {
         nome: document.getElementById("modalNome").value,
         cnpj: document.getElementById("modalCnpj").value,
         email: document.getElementById("modalEmail").value,
-        vantagens: document.getElementById("modalVantagens").value,
+        senha: document.getElementById("modalSenha").value,
     };
 
     fetch(`http://localhost:8080/empresas/${id}`, {

@@ -7,7 +7,7 @@ function cadastrarAluno(event) {
     const aluno = {
         nome: document.getElementById("nome").value,
         email: document.getElementById("email").value,
-        //senha: document.getElementById("senha").value,
+        senha: document.getElementById("senha").value,
         endereco: document.getElementById("endereco").value,
         rg: document.getElementById("rg").value,
         cpf: document.getElementById("cpf").value,
@@ -77,6 +77,7 @@ function exibirAlunos(alunos) {
       <td>${aluno.email}</td>
       <td>${aluno.curso}</td>
       <td>${aluno.instituicao}</td>
+      <td>${aluno.senha}</td>
       <td>
         <button class="btn btn-sm btn-warning" onclick="editarAluno('${aluno.id}')">Editar</button>
         <button class="btn btn-sm btn-danger" onclick="excluirAluno('${aluno.id}')">Excluir</button>
@@ -105,6 +106,7 @@ function editarAluno(id) {
       document.getElementById("modalEndereco").value = aluno.endereco;
       document.getElementById("modalCurso").value = aluno.curso;
       document.getElementById("modalInstituicao").value = aluno.instituicao;
+      document.getElementById("modalSenha").value = aluno.senha;
 
       // Exibir o modal
       const modal = new bootstrap.Modal(document.getElementById("modalAluno"));
@@ -129,7 +131,9 @@ function atualizarAluno(event) {
         email: document.getElementById("modalEmail").value,
         endereco: document.getElementById("modalEndereco").value,
         curso: document.getElementById("modalCurso").value,
-        instituicao: document.getElementById("modalInstituicao").value
+        instituicao: document.getElementById("modalInstituicao").value,
+        senha: document.getElementById("modalSenha").value
+
     };
 
     fetch(`http://localhost:8080/alunos/${id}`, {

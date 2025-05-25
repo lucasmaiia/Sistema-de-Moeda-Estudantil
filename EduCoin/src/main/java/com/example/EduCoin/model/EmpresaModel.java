@@ -19,7 +19,7 @@ public class EmpresaModel {
     private String nome;
     private String cnpj;
     private String email;
-    private String vantagens;
+    private String senha;
 
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
@@ -33,9 +33,9 @@ public class EmpresaModel {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    public void setVantagens(String vantagens) {
-        this.vantagens = vantagens;
-    }
+ public void setSenha(String senha) {
+     this.senha = senha;
+ }
     public String getCnpj() {
         return cnpj;
     }
@@ -47,7 +47,8 @@ public class EmpresaModel {
     }
     public String getNome() {
         return nome;
-    }public String getVantagens() {
-        return vantagens;
+    }
+    public String getSenha() {
+        return senha;
     }
 }

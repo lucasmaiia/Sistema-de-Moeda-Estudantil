@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.EduCoin.dto.EmpresaDto;
-import com.example.EduCoin.model.AlunoModel;
+
 import com.example.EduCoin.model.EmpresaModel;
 import com.example.EduCoin.repository.EmpresaRepository;
 
