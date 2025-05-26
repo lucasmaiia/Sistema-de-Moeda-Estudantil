@@ -1,4 +1,4 @@
-#  EduCoin 📚
+#  EducaCoin 📚
 
 Sistema de reconhecimento acadêmico por meio da distribuição de moedas virtuais, que podem ser trocadas por benefícios e recompensas. Alunos, professores e empresas parceiras interagem por meio de uma plataforma que promove o bom desempenho e o engajamento.
 
@@ -89,6 +89,7 @@ Sistema de reconhecimento acadêmico por meio da distribuição de moedas virtua
 ## Modelo ER
 
 <img src="Diagramas/EduCoin_ModeloER.png" alt="ModeloER" width="700px">
+
 
 ##  Requisitos Técnicos 
 
