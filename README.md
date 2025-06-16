@@ -69,7 +69,26 @@ Sistema de reconhecimento acadêmico por meio da distribuição de moedas virtua
 | 10 | Empresa Parceira     | Como **empresa parceira**, quero **receber um email com os detalhes e código de troca**, para que eu possa **validar o resgate da vantagem com segurança**. |
 
 ---
+## Histórias de Usuário - LAB 5 
+| ID   | Como...         | Eu quero...                                                                 | Para que...                                                                                      |
+|------|------------------|-----------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
+| US01 | Aluno           | me cadastrar informando meus dados e selecionando minha instituição         | eu possa participar do sistema de mérito                                                         |
+| US02 | Aluno           | ser notificado por email ao receber moedas                                   | eu saiba que fui reconhecido e possa acompanhar meu desempenho                                   |
+| US03 | Aluno           | consultar meu extrato de moedas                                              | eu possa visualizar meu saldo e as moedas que recebi ou troquei                                  |
+| US04 | Aluno           | trocar moedas por vantagens cadastradas                                      | eu possa utilizar meus méritos como recompensa                                                   |
+| US05 | Aluno           | receber um email com código e cupom ao trocar uma vantagem                   | eu possa utilizá-la presencialmente de forma segura e validada                                   |
+| US06 | Professor       | visualizar meu saldo de moedas                                               | eu saiba quantas moedas ainda posso distribuir                                                   |
+| US07 | Professor       | enviar moedas para um aluno com uma mensagem de reconhecimento               | eu possa valorizar seu desempenho e comportamento                                                |
+| US08 | Professor       | consultar o extrato das moedas enviadas                                      | eu possa acompanhar as transações que realizei com meus alunos                                   |
+| US09 | Professor       | acumular moedas não utilizadas entre os semestres                            | eu não perca meu saldo e possa continuar recompensando meus alunos no futuro                     |
+| US10 | Sistema         | notificar o aluno por email quando ele recebe uma moeda                      | o aluno fique ciente do reconhecimento recebido                                                  |
+| US11 | Empresa Parceira| se cadastrar no sistema                                                      | eu possa oferecer vantagens em troca das moedas dos alunos                                       |
+| US12 | Empresa Parceira| cadastrar vantagens com descrição, foto e custo em moedas                    | os alunos saibam o que estou oferecendo e possam trocar moedas por isso                          |
+| US13 | Empresa Parceira| receber um email com o código da troca ao aluno resgatar uma vantagem        | eu possa validar e liberar o benefício de forma segura                                           |
+| US14 | Sistema         | gerar um código único para cada troca de vantagem                            | facilite a conferência tanto para aluno quanto para a empresa                                    |
+| US15 | Todos os Perfis | realizar login com senha e autenticação                                     | eu possa acessar o sistema de forma segura e personalizada                                       |
 
+---
 ## Diagrama de caso de uso
 
 <img src="Diagramas/diagram-user-case.jpg" alt="Diagrama de caso de uso" width="700px">
